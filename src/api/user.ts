@@ -2,6 +2,7 @@ import axios from './axios';
 
 // 用户注册
 const register = (data: any) => {
+  console.log(data, 'api');
   return axios.post('/user/signup', data);
 };
 
@@ -35,7 +36,7 @@ const getAllUserList = (data: any) => {
   return axios.get('/user/getAllUserList', data);
 };
 
-export default {
+export {
   register,
   login,
   logout,
