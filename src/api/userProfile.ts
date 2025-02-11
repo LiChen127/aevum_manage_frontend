@@ -25,7 +25,6 @@ const getUserListWithProfie = (data: any) => {
   return axios.get('/userProfile/getUserListWithProfie', data);
 };
 
-
 export default {
   createUserProfile,
   getUserProfile,

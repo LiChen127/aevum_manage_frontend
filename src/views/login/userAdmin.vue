@@ -1,25 +1,51 @@
 <script lang="ts" setup>
 import { ElMessage } from 'element-plus';
-import { reactive, ref } from 'vue';
-import { login, register } from '../../api/user';
-import  useUserStore  from '../../store/user';
+import { reactive, ref, onMounted } from 'vue';
+import { login, register } from '@/api/user';
+import { useUserStore } from '@/store/user';
+
 const userStore = useUserStore();
 
 // 登录表单
 const loginForm = reactive({
   username: '',
   password: '',
-  usernameRules: { error: false, message: '请输入正确的手机号', trigger: 'blur', pattern: /^1[3-9]\d{9}$/ }, // 手机号11位, 13-9开头
-  passwordRules: { error: false, message: '请输入正确的密码, 至少8位, 数字和字母', trigger: 'blur', pattern: /^[a-zA-Z0-9]{8,}$/ }, // 密码至少8位, 数字和字母
+  usernameRules: {
+    error: false,
+    message: '请输入正确的手机号',
+    trigger: 'blur',
+    pattern: /^1[3-9]\d{9}$/,
+  }, // 手机号11位, 13-9开头
+  passwordRules: {
+    error: false,
+    message: '请输入正确的密码, 至少8位, 数字和字母',
+    trigger: 'blur',
+    pattern: /^[a-zA-Z0-9]{8,}$/,
+  }, // 密码至少8位, 数字和字母
 });
 // 注册表单
 const registerForm = reactive({
   username: '',
   password: '',
   confirmPassword: '',
-  usernameRules: { error: false, message: '请输入正确的手机号', trigger: 'blur', pattern: /^1[3-9]\d{9}$/ }, // 手机号11位, 13-9开头
-  passwordRules: { error: false, message: '请输入正确的密码, 至少8位, 数字和字母', trigger: 'blur', pattern: /^[a-zA-Z0-9]{8,}$/ }, // 密码至少8位, 数字和字母
-  confirmPasswordRules: { error: false, message: '请确认密码', trigger: 'blur', pattern: /^[a-zA-Z0-9]{8,}$/ },
+  usernameRules: {
+    error: false,
+    message: '请输入正确的手机号',
+    trigger: 'blur',
+    pattern: /^1[3-9]\d{9}$/,
+  }, // 手机号11位, 13-9开头
+  passwordRules: {
+    error: false,
+    message: '请输入正确的密码, 至少8位, 数字和字母',
+    trigger: 'blur',
+    pattern: /^[a-zA-Z0-9]{8,}$/,
+  }, // 密码至少8位, 数字和字母
+  confirmPasswordRules: {
+    error: false,
+    message: '请确认密码',
+    trigger: 'blur',
+    pattern: /^[a-zA-Z0-9]{8,}$/,
+  },
 });
 
 // 登录表单是否显示
@@ -128,31 +154,21 @@ const handleRegister = async () => {
   }
 };
 
+onMounted(() => {
+  debugger;
+});
 </script>
 
 <template>
   <div class="container">
-    <div class="container-left">  
-      <img src="@/assets/images/admin/admin.png" alt="admin-logo">
+    <div class="container-left">
+      <img src="@/assets/images/admin/admin.png" alt="admin-logo" />
     </div>
     <div class="container-right">
       <div class="container-right-title">
-        <span style="
-         font-size: 24px;
-         font-weight: 500;
-         margin-bottom: 10px;
-         "
-         >
-         欢迎来到
-        </span>
-        <br>
-        <span style="
-          font-size: 30px;
-          font-weight: 600;
-          margin-top: 15px; 
-          color: #6358DC;
-          "
-        >
+        <span style="font-size: 24px; font-weight: 500; margin-bottom: 10px"> 欢迎来到 </span>
+        <br />
+        <span style="font-size: 30px; font-weight: 600; margin-top: 15px; color: #6358dc">
           Aevum用户管理后台
         </span>
       </div>
@@ -161,13 +177,27 @@ const handleRegister = async () => {
         <form @submit.prevent="handleLogin">
           <div class="form-item">
             <label for="username">手机号</label>
-            <input type="text" id="username" v-model="loginForm.username" @blur="handleLoginFormUserBlur">
-            <span class="error-message" v-if="loginForm.usernameRules.error">{{ loginForm.usernameRules.message }}</span>
+            <input
+              type="text"
+              id="username"
+              v-model="loginForm.username"
+              @blur="handleLoginFormUserBlur"
+            />
+            <span class="error-message" v-if="loginForm.usernameRules.error">
+              {{ loginForm.usernameRules.message }}
+            </span>
           </div>
           <div class="form-item">
             <label for="password">密码</label>
-            <input type="password" id="password" v-model="loginForm.password" @blur="handleLoginFormPasswordBlur">
-            <span class="error-message" v-if="loginForm.passwordRules.error">{{ loginForm.passwordRules.message }}</span>
+            <input
+              type="password"
+              id="password"
+              v-model="loginForm.password"
+              @blur="handleLoginFormPasswordBlur"
+            />
+            <span class="error-message" v-if="loginForm.passwordRules.error">
+              {{loginForm.passwordRules.message }}
+            </span>
           </div>
           <div class="form-item">
             <button type="submit" @click.prevent="handleLogin">登录</button>
@@ -178,18 +208,39 @@ const handleRegister = async () => {
         <form @submit.prevent="handleRegister">
           <div class="form-item">
             <label for="username">手机号</label>
-            <input type="text" id="username" v-model="registerForm.username" @blur="handleRegisterFormUserBlur">
-            <span class="error-message" v-if="registerForm.usernameRules.error">{{ registerForm.usernameRules.message }}</span>
+            <input
+              type="text"
+              id="username"
+              v-model="registerForm.username"
+              @blur="handleRegisterFormUserBlur"
+            />
+            <span class="error-message" v-if="registerForm.usernameRules.error">{{
+              registerForm.usernameRules.message
+            }}</span>
           </div>
           <div class="form-item">
             <label for="password">密码</label>
-            <input type="password" id="password" v-model="registerForm.password" @blur="handleRegisterFormPasswordBlur">
-            <span class="error-message" v-if="registerForm.passwordRules.error">{{ registerForm.passwordRules.message }}</span>
+            <input
+              type="password"
+              id="password"
+              v-model="registerForm.password"
+              @blur="handleRegisterFormPasswordBlur"
+            />
+            <span class="error-message" v-if="registerForm.passwordRules.error">{{
+              registerForm.passwordRules.message
+            }}</span>
           </div>
           <div class="form-item">
             <label for="confirmPassword">确认密码</label>
-            <input type="password" id="confirmPassword" v-model="registerForm.confirmPassword" @blur="handleRegisterFormConfirmPasswordBlur">
-            <span class="error-message" v-if="registerForm.confirmPasswordRules.error">{{ registerForm.confirmPasswordRules.message }}</span>
+            <input
+              type="password"
+              id="confirmPassword"
+              v-model="registerForm.confirmPassword"
+              @blur="handleRegisterFormConfirmPasswordBlur"
+            />
+            <span class="error-message" v-if="registerForm.confirmPasswordRules.error">
+              {{ registerForm.confirmPasswordRules.message }}
+            </span>
           </div>
           <div class="form-item">
             <button type="submit" @click.prevent="handleRegister">注册</button>
@@ -198,26 +249,19 @@ const handleRegister = async () => {
       </div>
       <div class="toggle-form" v-if="loginFormShow">
         <span>没有账号？</span>
-        <span 
-          style="
-          color: #6358DC;
-          cursor: pointer;
-          text-decoration: underline;" 
+        <span
+          style="color: #6358dc; cursor: pointer; text-decoration: underline"
           @click="loginFormShow = false"
-          >
+        >
           立即注册
         </span>
       </div>
       <div class="toggle-form" v-else>
         <span>已有账号？</span>
-        <span 
-          style="
-          margin-top: 30px;
-          color: #6358DC;
-          cursor: pointer;
-          text-decoration: underline;" 
+        <span
+          style="margin-top: 30px; color: #6358dc; cursor: pointer; text-decoration: underline"
           @click="loginFormShow = true"
-          >
+        >
           立即登录
         </span>
       </div>
@@ -233,7 +277,7 @@ const handleRegister = async () => {
   flex-wrap: nowrap;
   height: 100%;
   width: 100%;
-  background-color: #E5E5E5;
+  background-color: #e5e5e5;
 
   &-left {
     flex: 1;
@@ -273,7 +317,8 @@ const handleRegister = async () => {
       font-family: 'PingFang SC', sans-serif;
       color: #333;
       margin-bottom: 20px;
-      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      font-family:
+        'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     }
 
     .admin-form {
@@ -310,7 +355,7 @@ const handleRegister = async () => {
           height: 40px;
           box-sizing: border-box;
           border: 1px solid #ccc;
-          background-color: #ECECEC;
+          background-color: #ececec;
           border-radius: 5px;
           padding: 10px 10px;
           font-size: 18px;
@@ -320,7 +365,7 @@ const handleRegister = async () => {
           width: 100%;
           height: 40px;
           border: none;
-          background-color: #6358DC;
+          background-color: #6358dc;
           color: #fff;
           font-size: 18px;
           border-radius: 5px;
@@ -334,8 +379,6 @@ const handleRegister = async () => {
         }
       }
     }
-
   }
 }
 </style>
-

@@ -4,7 +4,7 @@
 
 import { defineStore } from 'pinia';
 
-const useUserStore = defineStore('user', {
+export const useUserStore = defineStore('user', {
   state: () => ({
     userId: '',
     userInfo: {},
@@ -32,6 +32,5 @@ const useUserStore = defineStore('user', {
     getIsActive: (state) => state.isActive,
   },
 });
-
 
 export default useUserStore;

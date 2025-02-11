@@ -7,13 +7,13 @@ declare module '*.vue' {
   export default component;
 }
 
-declare module '@vue/runtime-core' {
-  interface GlobalComponents {
-    ElForm: typeof import('element-plus')['ElForm']
-    ElFormItem: typeof import('element-plus')['ElFormItem']
-    ElInput: typeof import('element-plus')['ElInput']
-    ElButton: typeof import('element-plus')['ElButton']
-  }
-}
+// declare module '@vue/runtime-core' {
+//   interface GlobalComponents {
+//     ElForm: typeof import('element-plus')['ElForm']
+//     ElFormItem: typeof import('element-plus')['ElFormItem']
+//     ElInput: typeof import('element-plus')['ElInput']
+//     ElButton: typeof import('element-plus')['ElButton']
+//   }
+// }
 
-export { }; 
+export {};

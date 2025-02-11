@@ -1,6 +1,6 @@
 export enum StyleModel {
   LIGHT = 'light',
-  DARK = 'dark'
+  DARK = 'dark',
 }
 
 export default function useStyleModelStore() {
@@ -8,6 +8,6 @@ export default function useStyleModelStore() {
     getStyleModel: StyleModel.LIGHT,
     setStyleModel(model: StyleModel) {
       this.getStyleModel = model;
-    }
+    },
   };
 }

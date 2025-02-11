@@ -14,4 +14,4 @@ export default function toggleTheme() {
   } else {
     html.classList.remove('dark');
   }
-};
+}

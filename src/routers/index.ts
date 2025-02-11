@@ -2,9 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import adminRoutes from './admin';
 const router = createRouter({
   history: createWebHistory(),
-  routes: [
-    ...adminRoutes,
-  ],
+  routes: [...adminRoutes],
 });
 
 // // 路由守卫

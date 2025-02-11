@@ -15,16 +15,13 @@ export default defineConfig({
       '/api': {
         target: 'http://127.0.0.1:3000',
         changeOrigin: true,
-      }
-    }
+      },
+    },
   },
   resolve: {
-    alias: [
-      {
-        find: '@',
-        replacement: path.resolve(__dirname, 'src')
-      }
-    ]
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
   },
   build: {
     outDir: path.resolve(__dirname, './dist'),
