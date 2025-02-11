@@ -8,13 +8,8 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "types": ["element-plus/global"],
+    "isolatedModules": true,
+    "jsx": "preserve"
   }
 }

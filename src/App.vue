@@ -1,12 +1,15 @@
 <script setup lang="ts">
-
 </script>
 
 <template>
-  <div>
-    <h1>Aevum 管理系统</h1>
+  <div class="c-container">
+    <RouterView />
   </div>
 </template>
 
 <style lang="scss" scoped>
+.c-container {
+  height: 100vh;
+  width: 100vw;
+}
 </style>
