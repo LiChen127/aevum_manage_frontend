@@ -154,9 +154,6 @@ const handleRegister = async () => {
   }
 };
 
-onMounted(() => {
-  debugger;
-});
 </script>
 
 <template>

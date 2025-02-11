@@ -1,7 +1,7 @@
 const routes = [
   {
     path: '/admin',
-    component: () => import('@/views/login/userAdmin.vue'),
+    component: () => import('@/views/admin/userAdmin.vue'),
   },
 ];
 
