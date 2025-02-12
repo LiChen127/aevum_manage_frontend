@@ -3,8 +3,10 @@ import { ElMessage } from 'element-plus';
 import { reactive, ref, onMounted } from 'vue';
 import { login, register } from '@/api/user';
 import { useUserStore } from '@/store/user';
+import { useRouter } from 'vue-router';
 
 const userStore = useUserStore();
+const router = useRouter();
 
 // 登录表单
 const loginForm = reactive({
@@ -23,6 +25,7 @@ const loginForm = reactive({
     pattern: /^[a-zA-Z0-9]{8,}$/,
   }, // 密码至少8位, 数字和字母
 });
+
 // 注册表单
 const registerForm = reactive({
   username: '',
@@ -76,14 +79,21 @@ const handleLoginFormPasswordBlur = () => {
 const handleLogin = async () => {
   try {
     const res = await login({
-      userId: userStore.getUserId,
       username: loginForm.username,
       password: loginForm.password,
     });
-    if ((res.data as any).code === 201) {
-      ElMessage.success('登录成功');
-      // 存一下cookie
-      console.log(res);
+    // 
+    if ((res as any).code === 200) {
+      const { status, userId } = res.data;
+      if (status && userId) {
+        userStore.setIsActive(true);
+        userStore.setUserId(userId);
+        userStore.setUserInfoField('username', loginForm.username);
+        ElMessage.success('登录成功');
+        router.replace('/');
+      } else {
+        ElMessage.error('登录失败, 请检查账号密码');
+      }
     }
   } catch (error) {
     console.log(error);
@@ -130,7 +140,7 @@ const handleRegister = async () => {
       role: 'superAdmin',
     };
     const res = await register(registerConfig);
-    if ((res.data as any).code === 201 && (res.data.data as any).infoCode === 0) {
+    if ((res as any).code === 201 && (res.data as any).infoCode === 0) {
       ElMessage.success('注册成功');
       loginFormShow.value = true;
       Object.assign(registerForm, {
@@ -142,10 +152,10 @@ const handleRegister = async () => {
       const userId = (res.data.data as any).userId;
       userStore.setUserId(String(userId));
     }
-    if ((res.data.data as any).infoCode === 1) {
+    if ((res.data as any).infoCode === 1) {
       ElMessage.warning('手机号已存在');
     }
-    if ((res.data.data as any).infoCode === 2) {
+    if ((res.data as any).infoCode === 2) {
       ElMessage.warning('密码格式不正确');
     }
   } catch (error) {

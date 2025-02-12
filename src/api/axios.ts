@@ -7,7 +7,11 @@ const instance = axios.create({
 // 请求拦截器
 instance.interceptors.request.use(
   (config) => {
-    console.log(config, 'request interceptors');
+    // 获取token
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   },
   (err) => {
@@ -18,11 +22,15 @@ instance.interceptors.request.use(
 // 响应拦截器
 instance.interceptors.response.use(
   (res) => {
-    console.log(res, 'response interceptors');
-    return res;
+    // 从cookie中获取token
+    const token = document.cookie.split('; ').find(row => row.startsWith('token='));
+    console.log(token);
+    if (token) {
+      localStorage.setItem('token', token);
+    }
+    return res.data;
   },
   (err) => {
-    console.log(err, 'response interceptors err');
     return Promise.reject(err);
   },
 );

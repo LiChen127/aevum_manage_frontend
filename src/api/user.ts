@@ -1,18 +1,21 @@
-import request from '../utils/request';
+import axios from './axios';
+
+// 路径前面统一添加/user
+const baseUrl = '/user';
 
 // 用户注册
 const register = (data: { username: string; password: string; role: string }) => {
-  return request({
-    url: '/api/user/register',
+  return axios({
+    url: `${baseUrl}/register`,
     method: 'post',
     data,
   });
 };
 
 // 用户登录
-const login = (data: { userId: string; username: string; password: string }) => {
-  return request({
-    url: '/api/user/login',
+const login = (data: { username: string; password: string }) => {
+  return axios({
+    url: `${baseUrl}/login`,
     method: 'post',
     data,
   });
@@ -20,8 +23,8 @@ const login = (data: { userId: string; username: string; password: string }) => 
 
 // 用户登出
 const logout = (data: any) => {
-  return request({
-    url: '/user/logout',
+  return axios({
+    url: `${baseUrl}/logout`,
     method: 'post',
     data,
   });
@@ -29,8 +32,8 @@ const logout = (data: any) => {
 
 // 获取用户信息
 const getUserInfo = (data: any) => {
-  return request({
-    url: '/user/getUserInfo',
+  return axios({
+    url: `${baseUrl}/getUserInfo`,
     method: 'get',
     data,
   });
@@ -38,8 +41,8 @@ const getUserInfo = (data: any) => {
 
 // 更新用户信息
 const updateUserInfo = (data: any) => {
-  return request({
-    url: '/user/updateUserInfo',
+  return axios({
+    url: `${baseUrl}/updateUserInfo`,
     method: 'post',
     data,
   });
@@ -47,8 +50,8 @@ const updateUserInfo = (data: any) => {
 
 // 获取用户信息列表(分页+搜索)
 const getUserList = (data: any) => {
-  return request({
-    url: '/user/getUserList',
+  return axios({
+    url: `${baseUrl}/getUserList`,
     method: 'get',
     data,
   });
@@ -56,8 +59,8 @@ const getUserList = (data: any) => {
 
 // 获取所有用户信息列表
 const getAllUserList = (data: any) => {
-  return request({
-    url: '/user/getAllUserList',
+  return axios({
+    url: `${baseUrl}/getAllUserList`,
     method: 'get',
     data,
   });

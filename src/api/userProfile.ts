@@ -6,8 +6,8 @@ const createUserProfile = (data: any) => {
 };
 
 // 获取人物画像
-const getUserProfile = (data: any) => {
-  return axios.get('/userProfile/getUserProfile', data);
+const getUserProfileByUserId = (data: any) => {
+  return axios.get('/userProfile/getUserProfileByUserId', data);
 };
 
 // 修改用户画像
@@ -25,9 +25,9 @@ const getUserListWithProfie = (data: any) => {
   return axios.get('/userProfile/getUserListWithProfie', data);
 };
 
-export default {
+export {
   createUserProfile,
-  getUserProfile,
+  getUserProfileByUserId,
   updateUserProfile,
   getUserProfileByProfileId,
   getUserListWithProfie,

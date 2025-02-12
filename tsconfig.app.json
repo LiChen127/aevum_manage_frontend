@@ -8,6 +8,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
+    "resolveJsonModule": true,
     "types": ["element-plus/global"],
     "isolatedModules": true,
     "jsx": "preserve"
