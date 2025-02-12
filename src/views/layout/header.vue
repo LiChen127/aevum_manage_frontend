@@ -2,46 +2,16 @@
 import { useUserStore } from '@/store/user';
 import { ref, reactive,onMounted } from 'vue';
 import area from '@/static/area.json';
-import { useAreaOptions } from '@/store/areaOptions';
 import { getUserProfileByUserId,createUserProfile,updateUserProfile } from '@/api/userProfile';
 import { ElMessage } from 'element-plus';
 // 随机生成图片链接 https://www.loliapi.com/acg/pp/
 const userStore = useUserStore();
 const userId = userStore.userId;
 const userInfo = userStore.userInfo;
-const areaOptionsStore = useAreaOptions();
-
-
-interface Area {
-  value: string;
-  label: string;
-  children?: Area[];
-}
 
 // 完善userInfoDialogVisible
 const userInfoDialogVisible = ref(false); 
 
-// 省市区
-const areaOptions = ref<Area[]>([]);
-
-// 初始化省市区为组件想要的数据结构并存到pinia
-const initAreaOptions = () => { 
-  for (const value of area) {
-    areaOptions.value.push({
-      value: value.code,
-      label: value.province,
-      children: value.citys.map(city => ({
-        value: city.code,
-        label: city.city,
-        children: city.areas.map(area => ({
-          value: area.code,
-          label: area.area,
-        })),
-      })),
-    });
-  }
-  areaOptionsStore.setAreaOptions(areaOptions.value); 
-}
 
 // 用户信息
 const userInfoConfig = reactive({
@@ -56,7 +26,6 @@ const userInfoConfig = reactive({
 // 完善用户信息点击事件函数
 const completeUserInfo = () => {
   userInfoDialogVisible.value = true;
-  initAreaOptions();
 }
 
 // 提交用户信息
@@ -75,6 +44,7 @@ const handleSubmit = async () => {
 
 const getUserProfile = async () => {
   try {
+    console.log(userId, 'userId');
     const res = await getUserProfileByUserId({
       userId: userId
     });
@@ -85,8 +55,8 @@ const getUserProfile = async () => {
   }
 }
 
-onMounted(() => {
-  getUserProfile();
+onMounted(async () => {
+  await getUserProfile();
 })
 
 </script>
@@ -131,7 +101,7 @@ export default {
       </el-form-item>
       <el-form-item label="地区">
         <el-cascader
-          :options="areaOptions"
+          :options="area"
           v-model="userInfoConfig.location"
           placeholder="请选择地区"
         >

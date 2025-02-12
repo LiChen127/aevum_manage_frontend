@@ -6,8 +6,9 @@ const createUserProfile = (data: any) => {
 };
 
 // 获取人物画像
-const getUserProfileByUserId = (data: any) => {
-  return axios.get('/userProfile/getUserProfileByUserId', data);
+const getUserProfileByUserId = async (data: any) => {
+  console.log(data, 'data');
+  return await axios.get('/userProfile/getUserProfileByUserId', data);
 };
 
 // 修改用户画像
